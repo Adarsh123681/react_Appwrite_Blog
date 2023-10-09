@@ -8,7 +8,7 @@ const client = new Client();
 const account = new Account(client);
 client
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("65111274195822fe60e6") // Your project ID
+  .setProject("65111274195822fe60e6") //PROJECT iD
 
 const LogIn = () => {
 
