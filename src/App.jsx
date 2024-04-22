@@ -1,24 +1,26 @@
 
 import LogIn from "./assets/Appwrite/LogIn"
 import AllBlog from "./assets/Appwrite/AllBlog"
-import SignUp from './assets/Appwrite/SignUp'
-import Navbar from './assets/Appwrite/Navbar'
-import About from "./assets/Appwrite/About"
+import SignUp from './assets/Appwrite/SignUp'  
 import AddBlog from "./assets/Appwrite/AddBlog"
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PasswordRecovery from "./assets/Appwrite/PasswordRecovery"
+import NavbarHead from "./assets/Appwrite/NavbarHead"
+import SearchBlog from "./assets/Appwrite/searchBlog"
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <NavbarHead />
         <Routes>
-          <Route path="/" element={< AddBlog />} />
+          <Route path="/" element={< LogIn />} />
           <Route path="/allBlog" element={<AllBlog />} />
-          <Route path="/logIn" element={<LogIn />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/addBlog" element={<AddBlog />} />
+          <Route path="/signUp" element={<SignUp />} /> 
+          <Route path="/passwordRecovery" element={<PasswordRecovery />} />
+          <Route path="/searchBlog" element={<SearchBlog/>} />
         </Routes>
       </BrowserRouter>
     </>

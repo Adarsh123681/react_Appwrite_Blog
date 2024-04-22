@@ -1,12 +1,18 @@
 import { useState } from 'react';
-import "./SignUp.css"
 import { Client, Account, ID } from "appwrite";
 import { useNavigate } from 'react-router-dom';
+import { Button, Container, Form } from "react-bootstrap"
+
 const client = new Client();
 const account = new Account(client);
+
+// const url = import.meta.env.VITE_APPWRITE_URL;
+// const project = import.meta.env.VITE_APPWRITE_PROJECT_ID
+
 client
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("65111274195822fe60e6") // Your project ID
+  .setProject("65111274195822fe60e6")
+
 const SignUp = () => {
 
   const navigate = useNavigate()
@@ -24,18 +30,18 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("hello");
       await account.create(
         ID.unique(),
         formData.email,
         formData.name,
         formData.password
       )
-      setFormData("");
-      navigate("/logIn")
+      alert("Successfully registerd")
+      setFormData(" ");
+      navigate("/")
 
     } catch (error) {
-
+      alert("error")
       return error
     }
 
@@ -43,33 +49,35 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input
+    <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", margin: "5rem 0 0 0" }}>
+
+      <Form onSubmit={handleSubmit} style={{ width: "40rem", backgroundColor: "whitesmoke", padding: "4rem", boxShadow: "2rem black" }}>
+        <h2>Register YourSelf Here</h2>
+        <Form.Control
           type="text"
           name="name"
           placeholder="name"
-          value={formData.name}
+          valu={formData.name}
           onChange={handleChange}
         />
-        <input
+        <Form.Control
           type="email"
           name="email"
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          style={{margin : "1rem 0 1rem 0"}}
         />
-        <input
+        <Form.Control
           type="password"
           name="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+        <Button type="submit" style={{margin:"1rem"}}>Sign Up</Button>
+      </Form>
+    </Container>
   );
 };
 
