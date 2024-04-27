@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import { Client, Account } from "appwrite";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
 const client = new Client();
 import { Form, Button, Container } from 'react-bootstrap';
 import { Email } from '@mui/icons-material';
@@ -16,8 +15,7 @@ const PasswordRecovery = () => {
   const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEmail({ ...email, [name]: value });
+    setEmail(e.target.value);
   };
 
   const recoverData = async () => {
@@ -46,7 +44,7 @@ const PasswordRecovery = () => {
             onChange={handleChange}
             style={{ width: "20rem", margin: ".5rem" }}
           />
-          <Button onClick={recoverData}>Send email <Email/></Button>
+          <Button onClick={recoverData}>Send email <Email /></Button>
         </Form.Group>
       </Container>
     </>

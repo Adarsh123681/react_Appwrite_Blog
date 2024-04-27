@@ -1,5 +1,4 @@
-import React, { useState } from 'react';  
-import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react'; 
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 const BlogCard = ({ title, img, content, auther}) => {
@@ -41,17 +40,3 @@ const BlogCard = ({ title, img, content, auther}) => {
   );
 };
 export default BlogCard;
-
-
- 
-
-// function WithHeaderStyledExample() {
-//   return (
-//     <Card>
-//       <Card.Header as="h5">Featured</Card.Header>
-      
-//     </Card>
-//   );
-// }
-
-// export default WithHeaderStyledExample;

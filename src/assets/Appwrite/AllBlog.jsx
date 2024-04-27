@@ -44,13 +44,13 @@ function AllBlog() {
   const handleDelete = async (ID) => {
     try {
       console.log(ID)
-      await document.deleteDocument('651564c47ac5e91d9a54', '651564eb6728d0191b53', `${ID}`);
-      console.log('Blog post deleted successfully');
-    } catch (error) {
+      //   await document.deleteDocument('651564c47ac5e91d9a54', '651564eb6728d0191b53', `${ID}`);
+      //   console.log('Blog post deleted successfully');
+    }
+    catch (error) {
       console.error('Error updating blog post:', error);
     }
   }
-
 
 
   return (
@@ -66,12 +66,12 @@ function AllBlog() {
             </Box>
           ) : (
             blogPosts && blogPosts.map((ele) => {
-              console.log(ele)
+              
               return (
                 <>
                   <BlogCard title={ele.title} img={ele.image} content={ele.content} auther={ele.auther} createdAt={ele.createdAt} />
                   <Button onClick={handleDelete(`${ele.id}`)}>DELETE <Delete /></Button>
-                  <Button onClick={handleUpdate(`${ele.id}`)} style={{ margin: "0 0 0 1.5rem" }}>DELETE <Update /></Button>
+                  <Button onClick={handleUpdate(`${ele.id}`)} style={{ margin: "0 0 0 1.5rem" }}>Update <Update /></Button>
                   <hr />
                 </>
               )
