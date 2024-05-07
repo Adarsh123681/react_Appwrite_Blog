@@ -3,7 +3,7 @@ import { Client, Databases, Query } from "appwrite";
 import BlogCard from './BlogCard';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import { Delete } from '@mui/icons-material';
+import { Delete, DeleteOutline } from '@mui/icons-material';
 import { Update } from '@mui/icons-material';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -25,27 +25,25 @@ function AllBlog() {
     ])
     promise.then((items) => {
       setBlogPosts(items.documents);
-      console.log(items);
-      console.log(items.documents)
     }).catch((error) => {
       return error
     })
   })
 
-  const handleUpdate = async (id) => {
-    try {
-      await client.database.updateDocument('651564c47ac5e91d9a54', '651564eb6728d0191b53', id, { title, content });
-      console.log('Blog post updated successfully');
-    } catch (error) {
-      console.error('Error updating blog post:', error);
-    }
-  }
+  // const updateDoc = async () => {
+  //   try {
+  //     await databases.updateDocument('651564c47ac5e91d9a54', '651564eb6728d0191b53', { blogPosts.title, blogPosts.content });
+  //     alert('Blog post updated successfully');
+  //   } catch (error) {
+  //     console.error('Error updating blog post:', error);
+  //   }
+  // }
 
-  const handleDelete = async (ID) => {
+  const deleteDoc = async (documentId) => {
+
     try {
-      console.log(ID)
-      //   await document.deleteDocument('651564c47ac5e91d9a54', '651564eb6728d0191b53', `${ID}`);
-      //   console.log('Blog post deleted successfully');
+      const delEle = await databases.deleteDocument('651564c47ac5e91d9a54', '651564eb6728d0191b53', documentId)
+      alert("Data deleted successfully...")
     }
     catch (error) {
       console.error('Error updating blog post:', error);
@@ -66,12 +64,12 @@ function AllBlog() {
             </Box>
           ) : (
             blogPosts && blogPosts.map((ele) => {
-              
+
               return (
                 <>
                   <BlogCard title={ele.title} img={ele.image} content={ele.content} auther={ele.auther} createdAt={ele.createdAt} />
-                  <Button onClick={handleDelete(`${ele.id}`)}>DELETE <Delete /></Button>
-                  <Button onClick={handleUpdate(`${ele.id}`)} style={{ margin: "0 0 0 1.5rem" }}>Update <Update /></Button>
+                  <Button onClick={() => deleteDoc(ele.$id)}>DELETE <Delete /></Button>
+                  {/* <Button onClick={()=> updateDoc(ele.$id)} style={{ margin: "0 0 0 1.5rem" }}>Update <Update /></Button> */}
                   <hr />
                 </>
               )

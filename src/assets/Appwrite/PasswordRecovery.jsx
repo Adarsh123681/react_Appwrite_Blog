@@ -11,16 +11,14 @@ client
   .setProject("65111274195822fe60e6") //PROJECT iD
 
 const PasswordRecovery = () => {
-
   const [email, setEmail] = useState("");
-
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
   const recoverData = async () => {
     try {
-      const promise = account.createRecovery(email, 'http://localhost:5173/logIn');
+      const promise = account.createRecovery(email, 'http://localhost:5173/');
 
       promise.then(function (response) {
         alert("success")

@@ -41,7 +41,7 @@ function CreateBlog() {
     );
     const response = await promise.json()
     try {
-      if (!response) {
+      if (response == "") {
         alert("no reponse , fill all details")
       }
       else {
@@ -52,7 +52,7 @@ function CreateBlog() {
         setAuther("")
       }
     } catch (error) {
-      console.log("Error")
+        alert("INTERNAL ERROR...")
     }
   };
   return (
