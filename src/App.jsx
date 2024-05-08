@@ -1,13 +1,13 @@
 
-import LogIn from "./assets/Appwrite/LogIn"
-import AllBlog from "./assets/Appwrite/AllBlog"
-import SignUp from './assets/Appwrite/SignUp'
-import CreateBlog from "./assets/Appwrite/CreateBlog"
+import LogIn from "./Appwrite/LogIn"
+import AllBlog from "./Appwrite/AllBlog"
+import SignUp from './Appwrite/SignUp'
+import CreateBlog from "./Appwrite/CreateBlog"
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import PasswordRecovery from "./assets/Appwrite/PasswordRecovery"
-import NavbarHead from "./assets/Appwrite/NavbarHead"
-import SearchBlog from "./assets/Appwrite/searchBlog"
-import PasswordReset from "./assets/Appwrite/PasswordReset"
+import PasswordRecovery from "./Appwrite/PasswordRecovery"
+import NavbarHead from "./Appwrite/NavbarHead"
+import SearchBlog from "./Appwrite/SearchBlog"
+import PasswordReset from "./Appwrite/PasswordReset"
 
 function App() {
 
