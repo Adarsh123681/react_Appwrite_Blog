@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { account} from "./AppwriteEndpoints";
-import e from 'cors';
+import { account} from "./AppwriteEndpoints/endPoints";
+ 
 
 const PasswordReset = () => {
   const [user, setUser] = useState({
