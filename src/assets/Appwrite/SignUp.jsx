@@ -1,17 +1,8 @@
 import { useState } from 'react';
-import { Client, Account, ID } from "appwrite";
+import { account } from './AppwriteEndpoints/endPoints'
 import { useNavigate } from 'react-router-dom';
-import { Button, Container, Form, Modal } from "react-bootstrap"
-
-const client = new Client();
-const account = new Account(client);
-
-// const url = import.meta.env.VITE_APPWRITE_URL;
-// const project = import.meta.env.VITE_APPWRITE_PROJECT_ID
-
-client
-  .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("65111274195822fe60e6")
+import { Button, Container, Form } from "react-bootstrap"
+import { ID } from "appwrite"
 
 const SignUp = () => {
 
@@ -22,7 +13,7 @@ const SignUp = () => {
     password: '',
   });
 
-  const [show, setShow] = useState(false)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -32,27 +23,27 @@ const SignUp = () => {
     e.preventDefault();
     const { email, name, password } = formData
     try {
+      if (!email, !name, !password) {
+        alert("Please fill all credentials")
+      }
       await account.create(
         ID.unique(),
         email,
         name,
         password
       )
-      const verify = await account.createVerification(email);
-      console.log("verify", verify)
+      await account.createVerification(email);
       alert("Successfully registerd");
-      setShow(true)
       navigate("/");
 
     } catch (error) {
       alert("error")
-      return error
     }
   };
 
 
   return (
-    <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", margin: "5rem 0 0 0" }}>
+    <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", marginTop: "5rem" }}>
 
       <Form onSubmit={handleSubmit} style={{ width: "40rem", backgroundColor: "whitesmoke", padding: "4rem", boxShadow: "2rem black" }}>
         <h2>Register YourSelf Here</h2>
@@ -80,31 +71,6 @@ const SignUp = () => {
         />
         <Button type="submit" style={{ margin: "1rem" }}>Sign Up</Button>
       </Form>
-
-      {/* modeal to verificaion */}
-      {
-        show && <div
-          className="modal show"
-          style={{ display: 'block', position: 'initial' }}
-        >
-          <Modal.Dialog>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-              <p>Modal body text goes here.</p>
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button variant="secondary">Close</Button>
-              <Button variant="primary">Save changes</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
-        </div>
-
-      }
-
     </Container>
   );
 };

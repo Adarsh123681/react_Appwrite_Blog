@@ -2,19 +2,9 @@ import { useState } from 'react';
 import React from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Client, Account } from "appwrite";
 import { Link, useNavigate } from 'react-router-dom';
-const client = new Client();
-
-// const url = import.meta.env.VITE_APPWRITE_URL;
-// const project = import.meta.env.VITE_APPWRITE_PROJECT_ID
-
-const account = new Account(client);
-
-client
-  .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("65111274195822fe60e6")
-
+import { account } from "./AppwriteEndpoints/endPoints"
+ 
 const LogIn = () => {
 
   const navigate = useNavigate()
@@ -44,11 +34,12 @@ const LogIn = () => {
     }
   };
 
+
   return (
-    <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", margin: "5rem 0 0 0" }}>
-      <Form onSubmit={handleSubmit} style={{ width: "40rem", backgroundColor: "whitesmoke", padding: "4rem", boxShadow: "2rem black" }}>
+    <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", marginTop: "5rem" }}>
+      <Form onSubmit={handleSubmit} style={{ width: "40rem", backgroundColor: "whitesmoke", padding: "4rem", boxShadow: "2rem black", margin: "auto" }}>
         <div className="form-group">
-          <h2 style={{text:"center"}}>Welocme Back !!!</h2>
+          <h2 style={{ text: "center" }}>Welocme Back !!!</h2>
           <Form.Label htmlFor="email">Email:</Form.Label>
 
           <Form.Control
@@ -70,12 +61,14 @@ const LogIn = () => {
 
           />
         </div>
-        <Button type="submit" style={{marginTop:"1rem"}}>Sign In</Button>
-        <div style={{margin:"1rem 0 1rem 0"}}>
-          NewUser: <Link to="/signUp" >
+        <Button type="submit" style={{ marginTop: "1rem" }}>Sign In</Button>
+        <div style={{ margin: "1rem 0 1rem 0" }}>
+          NewUser: <Link to="/signUp" style={{ textDecoration: "none" }}>
             Sign Up </Link>
         </div>
-        ForgotPassword :<Link to="/passwordRecovery"> FORGOT PASSWORD </Link>
+        ForgotPassword :<Link to="/passwordRecovery" style={{ textDecoration: "none" }}> FORGOT PASSWORD </Link>
+
+
       </Form>
     </Container>
 

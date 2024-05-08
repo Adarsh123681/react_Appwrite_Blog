@@ -1,14 +1,7 @@
-import React from 'react'
-import { useState } from 'react';
-import { Client, Account } from "appwrite";
-const client = new Client();
+import React , {useState} from 'react'
+import { account } from "./AppwriteEndpoints/endPoints"
 import { Form, Button, Container } from 'react-bootstrap';
 import { Email } from '@mui/icons-material';
-
-const account = new Account(client);
-client
-  .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("65111274195822fe60e6") //PROJECT iD
 
 const PasswordRecovery = () => {
   const [email, setEmail] = useState("");
@@ -18,17 +11,15 @@ const PasswordRecovery = () => {
 
   const recoverData = async () => {
     try {
-      const promise = account.createRecovery(email, 'http://localhost:5173/');
+      const promise = account.createRecovery(email, 'http://localhost:5173/passwordReset');
 
       promise.then(function (response) {
-        alert("success")
-        console.log(response); // Success
+        alert("success") 
       }, function (error) {
-        alert("failed")
-        console.log(error); // Failure
+        alert("failed") 
       });
     } catch (error) {
-
+        alert("internal error")
     }
   }
   return (

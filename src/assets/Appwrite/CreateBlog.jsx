@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import { Client, Databases, ID } from "appwrite";
+import { ID } from "appwrite";
+import { databases } from "./AppwriteEndpoints/endPoints"
 import { Button, Container, Form } from "react-bootstrap";
-// import { collectionId, databaseId, url, project } from "./Appwrite";
 
-const client = new Client()
-  .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("65111274195822fe60e6")
 
 function CreateBlog() {
   // State to store the log message
   const createdDate = new Date().toISOString()
-  console.log(createdDate)
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [auther, setAuther] = useState("")
@@ -29,9 +25,7 @@ function CreateBlog() {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const databases = new Databases(client);
-    const promise = await databases.createDocument(
-      '651564c47ac5e91d9a54', '651564eb6728d0191b53',
+    const promise = await databases.createDocument(import.meta.env.VITE_APPWRITE_DATABASE_ID, import.meta.env.VITE_APPWRITE_COLLECTION_ID,
       ID.unique(),
       {
         title,
@@ -41,7 +35,7 @@ function CreateBlog() {
     );
     const response = await promise.json()
     try {
-      if (response == "") {
+      if (!response) {
         alert("no reponse , fill all details")
       }
       else {
@@ -52,14 +46,14 @@ function CreateBlog() {
         setAuther("")
       }
     } catch (error) {
-        alert("INTERNAL ERROR...")
+      alert("INTERNAL ERROR...")
     }
   };
   return (
     <>
-      <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", margin: "5rem 0 0 0" }}>
+      <Container style={{ display: "grid", justifyItems: "center", alignItems: "center", margin: "auto", marginTop: "4rem" }}>
         <h2>BLOG FORM</h2>
-        <Form onSubmit={handleSubmit} style={{ width: "40rem", backgroundColor: "whitesmoke", padding: "4rem", boxShadow: "2rem black" }}>
+        <Form onSubmit={handleSubmit} style={{ width: "40rem", backgroundColor: "whitesmoke", padding: "4rem", boxShadow: "2rem black 2rem" }}>
           <Form.Control
             label="Title"
             fullWidth
@@ -68,6 +62,7 @@ function CreateBlog() {
             variant="outlined"
             margin="normal"
             placeholder="Enter title"
+
           />
           <Form.Control
             label="Auther"
@@ -77,7 +72,7 @@ function CreateBlog() {
             variant="outlined"
             margin="normal"
             placeholder="Enter Auther"
-            style={{margin:"1rem 0 1rem o"}}
+            style={{ margin: "1rem 0 1rem 0" }}
           />
           <Form.Control
             tabel="Content"
@@ -89,7 +84,7 @@ function CreateBlog() {
             placeholder="Enter content"
           />
 
-          <Button style={{ margin:"1rem 0 0 0" }}>
+          <Button style={{ margin: "1rem 0 0 0" }}>
             Add Blog
           </Button>
         </Form>
